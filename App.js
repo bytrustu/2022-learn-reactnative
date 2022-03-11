@@ -1,60 +1,41 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import React, { useState } from 'react'
-import type { Node } from 'react'
 import {
   SafeAreaView,
   StyleSheet,
-  ScrollView,
   View,
   Text,
-  StatusBar, Button,
+  Button,
 } from 'react-native'
+import Counter from './components/Counter'
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen'
-import Greeting from './components/Greeting'
-import Box from './components/Box'
+const App = () => {
 
-const App: () => Node = () => {
+  const [count, setCount] = useState(0)
 
-  const [visible, setVisible] = useState(true)
+  const onIncrease = () => {
+    setCount(prev => prev + 1)
+  }
 
-  const onPress = () => {
-    setVisible(!visible)
+  const onDecrease = () => {
+    setCount(prev => prev - 1)
   }
 
   return (
-    <>
-      <StatusBar barStyle='dark-content' />
-      <SafeAreaView>
-        <Greeting />
-        {
-          visible && (
-            <Box
-              rounded
-              size='medium'
-              backgroundColor='red'
-            />
-          )
-        }
-        <Button title='토글' onPress={onPress} />
-      </SafeAreaView>
-    </>
-
+    <SafeAreaView style={styles.full}>
+      <Counter
+        count={count}
+        onIncrease={onIncrease}
+        onDecrease={onDecrease}
+      />
+    </SafeAreaView>
   )
 }
+
+const styles = StyleSheet.create({
+  full: {
+    flex: 1,
+  }
+})
 
 
 export default App
