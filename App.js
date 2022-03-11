@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React from 'react'
+import React, { useState } from 'react'
 import type { Node } from 'react'
 import {
   SafeAreaView,
@@ -14,7 +14,7 @@ import {
   ScrollView,
   View,
   Text,
-  StatusBar,
+  StatusBar, Button,
 } from 'react-native'
 
 import {
@@ -24,17 +24,37 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen'
+import Greeting from './components/Greeting'
+import Box from './components/Box'
 
 const App: () => Node = () => {
+
+  const [visible, setVisible] = useState(true)
+
+  const onPress = () => {
+    setVisible(!visible)
+  }
+
   return (
     <>
       <StatusBar barStyle='dark-content' />
       <SafeAreaView>
-        <Text>HELLO REACT</Text>
+        <Greeting />
+        {
+          visible && (
+            <Box
+              rounded
+              size='medium'
+              backgroundColor='red'
+            />
+          )
+        }
+        <Button title='토글' onPress={onPress} />
       </SafeAreaView>
     </>
 
   )
 }
+
 
 export default App
